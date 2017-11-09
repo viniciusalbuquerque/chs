@@ -21,9 +21,7 @@ string add1ToValue(string value) {
 		}
 		*rit = '0';
 	}
-
 	value.insert(0, "1");
-
 	return value;
 }
 
@@ -31,10 +29,25 @@ string getNextPalindrome(string value) {
 	string strValue = add1ToValue(value);
 	string strValue2 = strValue;
 	reverse(strValue.begin(), strValue.end());
-	if(strValue.compare(strValue2) != 0) {
-		return getNextPalindrome(strValue2);
+	if(strValue.compare(strValue2) == 0) {
+		return strValue2;
 	}
-	return strValue2;
+	cout << strValue2 << endl;
+	return getNextPalindrome(strValue2);
+}
+
+string doPalindromeSearch(string value) {
+	bool isPal = false;
+	while(!isPal) {
+		string valueAdded = add1ToValue(value);
+		string strValue2 = valueAdded;
+		reverse(valueAdded.begin(), valueAdded.end());
+		if(valueAdded.compare(strValue2) == 0) {
+			isPal = true;
+		}
+		value = strValue2;
+	}
+	return value;
 }
 
 string removeInitialZeros(string text) {
@@ -70,7 +83,7 @@ int main() {
 	vector<string> values = readValues(n);
 	
 	for(int i = 0; i < values.size(); i++) {
-		cout << getNextPalindrome(values[i]) << endl;	
+		cout << doPalindromeSearch(values[i]) << endl;	
 	}
 	return 0;
 }

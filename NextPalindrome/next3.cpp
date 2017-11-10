@@ -8,7 +8,7 @@ using namespace std;
 // test case: 94187978322
 // answer: 94188088149
 
-string add1ToValue(string value) {
+string add1ToValue(string& value) {
 	if(value.back() != '9') {
 		*value.rbegin() = value.back() + 1;
 		return value;
@@ -25,18 +25,39 @@ string add1ToValue(string value) {
 	return value;
 }
 
-string getNextPalindrome(string value) {
-	string strValue = add1ToValue(value);
-	string strValue2 = strValue;
-	reverse(strValue.begin(), strValue.end());
-	if(strValue.compare(strValue2) == 0) {
-		return strValue2;
+bool isPalindrome(string& strValue) {
+	string::iterator fow = strValue.begin();
+	string::iterator back = strValue.end();
+	--back;
+	while(fow < back) {
+		if(*fow != *back) return false;	
+		++fow;
+		--back;
 	}
-	cout << strValue2 << endl;
-	return getNextPalindrome(strValue2);
+	return true;
 }
 
-string doPalindromeSearch(string value) {
+string getNextPalindrome(string& value) {
+	bool isPal = false;
+	string strValue = value;
+	while(!isPal) {
+		strValue = add1ToValue(strValue);	
+		isPal = isPalindrome(strValue);
+	}
+	return strValue;
+}
+
+// string getNextPalindrome(string value) {
+// 	string strValue = add1ToValue(value);
+// 	string strValue2 = strValue;
+// 	reverse(strValue.begin(), strValue.end());
+// 	if(strValue.compare(strValue2) == 0) {
+// 		return strValue2;
+// 	}
+// 	return getNextPalindrome(strValue2);
+// }
+
+string doPalindromeSearch(string& value) {
 	bool isPal = false;
 	while(!isPal) {
 		string valueAdded = add1ToValue(value);
@@ -71,6 +92,13 @@ vector<string> readValues(int n) {
 	return values;
 }
 
+void doCalculations(vector<string>& values) {
+	int size = values.size();
+	for(int i = 0; i != size; i++) {
+		cout << getNextPalindrome(values[i]) << endl;
+	}
+}
+
 int main() {
 
 	string input = "";
@@ -81,9 +109,10 @@ int main() {
 	int n = 0;
 	myStream >> n;
 	vector<string> values = readValues(n);
-	
-	for(int i = 0; i < values.size(); i++) {
-		cout << doPalindromeSearch(values[i]) << endl;	
-	}
+	doCalculations(values);
+
+	// for(int i = 0; i < values.size(); i++) {
+	// 	cout << doPalindromeSearch(values[i]) << endl;	
+	// }
 	return 0;
 }

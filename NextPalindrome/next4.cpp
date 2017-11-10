@@ -1,8 +1,8 @@
 #include <iostream>
 #include <string>
-#include <vector>
 #include <algorithm>
 #include <sstream>
+#include <queue>
 using namespace std;
 
 // test case: 94187978322
@@ -79,23 +79,24 @@ string removeInitialZeros(string& text) {
 	return text;
 }
 
-vector<string> readValues(int n) {
-	vector<string> values;
+queue<string> readValues(int n) {
+	queue<string> values;
 	for(int i = 0; i < n; i++) {
 		string text;
 		getline (cin,text);
 
 		text = removeInitialZeros(text);
 
-		values.push_back(text);
+		values.push(text);
 	}
 	return values;
 }
 
-void doCalculations(vector<string>& values) {
-	int size = values.size();
-	for(int i = 0; i != size; i++) {
-		cout << getNextPalindrome(values[i]) << endl;
+void doCalculations(queue<string>& values) {
+	while(!values.empty()) {
+		string value = values.front();
+		cout << getNextPalindrome(value) << endl;
+		values.pop();
 	}
 }
 
@@ -108,7 +109,7 @@ int main() {
 	
 	int n = 0;
 	myStream >> n;
-	vector<string> values = readValues(n);
+	queue<string> values = readValues(n);
 	doCalculations(values);
 
 	return 0;

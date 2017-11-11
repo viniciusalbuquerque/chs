@@ -3,11 +3,65 @@
 #include <vector>
 #include <iostream>
 #include <algorithm>
+#include <string>
+#include <sstream>
+#include <iostream>
 using namespace std;
 
-class Professor : public Person {};
+class Person{
+public:
+    string name;
+    virtual void putdata() = 0;
+    virtual void getdata() = 0;
+};
 
-class Person{};
+class Professor : public Person {
+public: 
+    static int prof_ids;
+    Professor() {
+        id = prof_ids;
+        prof_ids++;
+    }
+    void putdata() {
+        cout << name << " "<< age << " " << publications << " " << id << endl;
+    }
+
+    void getdata() {
+        cin >> name >> age >> publications;
+    }
+private:
+    int id;
+    int age;
+    int publications;
+};
+
+class Student : public Person {
+public:
+    static int stu_ids;
+    Student() { 
+        id = stu_ids;
+        stu_ids++;
+    }
+    void putdata() {
+        cout << name << " " << age << " " << total << " " << id << endl;
+    }
+
+    void getdata() {
+        int a,b,c,d,e,f;
+        cin >> name >> age >> a >> b >> c >> d >> e >> f;
+
+        total = a + b + c + d + e + f;
+    }
+private:
+    int id;
+    int age;
+    int total;
+
+};
+
+
+int Professor::prof_ids = 1;
+int Student::stu_ids = 1;
 
 int main(){
 

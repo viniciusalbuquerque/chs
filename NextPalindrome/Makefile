@@ -2,11 +2,11 @@ CC=g++
 CFLAGS=-c -Wall -g -I.
 OFLAGS=-o
 
-run: next4.o
-	$(CC) next4.o
+run: next5.o
+	$(CC) next5.o
 
-next4.o: next4.cpp
-	$(CC) $(CFLAGS) next4.cpp
+next5.o: next5.cpp
+	$(CC) $(CFLAGS) next5.cpp
 
 clean:
 	rm -f *.o run *.out

@@ -47,16 +47,6 @@ string getNextPalindrome(string& value) {
 	return strValue;
 }
 
-// string getNextPalindrome(string value) {
-// 	string strValue = add1ToValue(value);
-// 	string strValue2 = strValue;
-// 	reverse(strValue.begin(), strValue.end());
-// 	if(strValue.compare(strValue2) == 0) {
-// 		return strValue2;
-// 	}
-// 	return getNextPalindrome(strValue2);
-// }
-
 string doPalindromeSearch(string& value) {
 	bool isPal = false;
 	while(!isPal) {
@@ -84,9 +74,7 @@ queue<string> readValues(int n) {
 	for(int i = 0; i < n; i++) {
 		string text;
 		getline (cin,text);
-
-		text = removeInitialZeros(text);
-
+		// text = removeInitialZeros(text);
 		values.push(text);
 	}
 	return values;

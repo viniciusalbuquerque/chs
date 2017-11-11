@@ -9,4 +9,4 @@ test.o: repeating_char.cpp
 	$(CC) $(CFLAGS) repeating_char.cpp
 
 clean:
-	rm -f *.o run
+	rm -f *.o *.out run

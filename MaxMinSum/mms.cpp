@@ -20,8 +20,6 @@ int main() {
     	rotate(arr.begin(), arr.begin()+1, arr.end());
     }
 
-    
-
     cout << *sums.begin() << " " << *sums.rbegin() << endl;
     return 0;
 }
